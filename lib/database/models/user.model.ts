@@ -1,16 +1,6 @@
-import { Document, Schema, model, models } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
-const EmailSchema = new Schema({
-    address: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    isDefault: {
-        type: Boolean,
-        default: false,
-    }
-}, { _id: false });
+
 
 const UserSchema = new Schema({
     clerkId: {
@@ -18,7 +8,11 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
-    emails: [EmailSchema],
+    emails: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     username: {
         type: String, 
         required: true,

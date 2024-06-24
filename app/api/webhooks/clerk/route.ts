@@ -57,7 +57,7 @@ export async function POST(req: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
 
-  // User CREATE
+  // CREATE
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
 
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
-          userId: newUser._id
+          userId: newUser._id,
         },
       });
     }
@@ -84,14 +84,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "OK", user: newUser });
   }
 
-  // User UPDATE
+  // UPDATE
   if (eventType === "user.updated") {
-    const { id, image_url, first_name, last_name, username, email_addresses } = evt.data;
+    const { id, image_url, first_name, last_name, username } = evt.data;
 
     const user = {
       firstName: first_name,
       lastName: last_name,
-      email: email_addresses[0].email_address,
       username: username!,
       photo: image_url,
     };
@@ -110,10 +109,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "OK", user: deletedUser });
   }
 
-
   // CREATE Organization
   if (eventType === "organization.created") {
-    const { id, name, created_by, created_at, image_url, } = evt.data;
+    const { id, name, created_by, created_at, image_url, slug, } = evt.data;
 
     const organization = {
       clerkId: id,
@@ -121,6 +119,7 @@ export async function POST(req: Request) {
       createdBy: created_by,
       createdAt: new Date(created_at),
       imageUrl: image_url,
+      slug: slug,
     };
 
     const newOrganization = await createOrganization(organization);
@@ -137,11 +136,11 @@ export async function POST(req: Request) {
 
   // UPDATE ORGANIZATION
   if (eventType === "organization.updated") {
-    const { id, name, slug, created_by, updated_at, image_url } = evt.data;
+    const { id, name, created_by, updated_at, image_url } = evt.data;
 
     const organization = {
       name: name,
-      slug: slug,
+      
       created_by: created_by,
       updatedAt: new Date(updated_at),
       imageUrl: image_url,

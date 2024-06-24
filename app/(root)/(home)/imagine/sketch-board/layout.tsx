@@ -1,6 +1,5 @@
-import { Work_Sans } from "next/font/google";
 
-import "./globals.css";
+import "../../../../globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 import Room from "./Room";

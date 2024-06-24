@@ -4,9 +4,10 @@ import CursorChat from "./cursor/CursorChat";
 import Live from "./Live";
 import ReactionSelector from "./reaction/ReactionButton";
 import FlyingReaction from "./reaction/FlyingReaction";
-import Navbar from "./Navbar";
+
 import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
+import Navbar from "./Navbar";
 
 export {
   LiveCursors,

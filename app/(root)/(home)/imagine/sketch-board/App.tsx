@@ -37,7 +37,7 @@ const Home = () => {
    * Over here, we are storing the canvas objects in the key-value store.
    */
   const canvasObjects = useStorage((root) => root.canvasObjects);
-
+  // up an authentication endpoint to enable permissions.
   /**
    * canvasRef is a reference to the canvas element that we'll use to initialize
    * the fabric canvas.

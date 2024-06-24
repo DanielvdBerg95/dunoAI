@@ -15,14 +15,13 @@ declare type UpdateUserParams = {
   lastName: string;
   username: string;
   photo: string;
-  email: string;
+  
 };
 
 
 declare type CreateOrganizationParams = {
   clerkId: string;
   name: string;
-  slug: string;
   createdBy: string;
   createdAt: Date;
   imageUrl: string;
@@ -45,7 +44,7 @@ declare type UpdateOrganizationParams = {
   businessGoals?: string[];
   slug?: string;
   createdBy?: string;
-  createdAt: Date;
+  createdAt?: Date;
   updatedAt: Date;
   imageUrl: string;
   maxAllowedMemberships?: number;
