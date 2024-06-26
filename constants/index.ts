@@ -1,5 +1,49 @@
 export const COLORS = ["#DC2626", "#D97706", "#059669", "#7C3AED", "#DB2777"];
 
+export const navLinks = [
+  {
+    label: "Home",
+    route: "/imagine",
+    icon: "/assets/icons/home.svg",
+  },
+  {
+    label: "Dashboard",
+    route: "/imagine/imagine-dashboard",
+    icon: "/assets/icons/profile.svg",
+  },
+  {
+    label: "Image Restore",
+    route: "/imagine/transformations/add/restore",
+    icon: "/assets/icons/image.svg",
+  },
+  {
+    label: "Generative Fill",
+    route: "/imagine/transformations/add/fill",
+    icon: "/assets/icons/stars.svg",
+  },
+  {
+    label: "Object Remove",
+    route: "/imagine/transformations/add/remove",
+    icon: "/assets/icons/scan.svg",
+  },
+  {
+    label: "Object Recolor",
+    route: "/imagine/transformations/add/recolor",
+    icon: "/assets/icons/filter.svg",
+  },
+  {
+    label: "Background Remove",
+    route: "/imagine/transformations/add/removeBackground",
+    icon: "/assets/icons/camera.svg",
+  },
+  
+  {
+    label: "Buy Credits",
+    route: "/imagine/credits",
+    icon: "/assets/icons/bag.svg",
+  },
+];
+
 export const shapeElements = [
   {
     icon: "/assets/rectangle.svg",

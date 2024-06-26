@@ -2,14 +2,14 @@
 
 import { UpdateQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
-import { connect } from "../database/mongoose";
+import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 import Organization from "../database/models/organization.model";
 
 // CREATE
 export async function createOrganization(organization: CreateOrganizationParams) {
   try {
-    await connect();
+    await connectToDatabase();
 
     const newOrganization = await Organization.create(organization);
 
@@ -22,7 +22,7 @@ export async function createOrganization(organization: CreateOrganizationParams)
 // READ
 export async function getOrganizationById(organizationId: string) {
   try {
-    await connect();
+    await connectToDatabase();
 
     const organization = await Organization.findOne({ clerkId: organizationId });
 
@@ -37,7 +37,7 @@ export async function getOrganizationById(organizationId: string) {
 // UPDATE
 export async function updateOrganization(clerkId: string, organization: UpdateOrganizationParams) {
   try {
-    await connect();
+    await connectToDatabase();
 
     const existingOrganization = await Organization.findOne({ clerkId });
     if (!existingOrganization) {
@@ -98,7 +98,7 @@ export async function updateOrganization(clerkId: string, organization: UpdateOr
 // DELETE
 export async function deleteOrganization(clerkId: string) {
   try {
-    await connect();
+    await connectToDatabase();
 
     // Find organization to delete
     const organizationToDelete = await Organization.findOne({ clerkId });

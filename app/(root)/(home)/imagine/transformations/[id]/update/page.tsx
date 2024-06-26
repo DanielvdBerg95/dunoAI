@@ -7,7 +7,7 @@ import { transformationTypes } from "@/constants";
 import { getUserById } from "@/lib/actions/user.action";
 import { getImageById } from "@/lib/actions/image.actions";
 
-const Page = async ({ params: { id } }: SearchParamProps) => {
+const UpdatePage = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = auth();
 
   if (!userId) redirect("/sign-in");
@@ -36,4 +36,4 @@ const Page = async ({ params: { id } }: SearchParamProps) => {
   );
 };
 
-export default Page;
+export default UpdatePage;

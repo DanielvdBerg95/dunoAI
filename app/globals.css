@@ -156,7 +156,7 @@
 @layer utilities {
   /* ===== UTILITIES */
   .wrapper {
-    @apply pr-28 ml-72 text-light-700 mt-20 p-16-regular ;
+    @apply pr-5 pl-5 text-light-700 mt-20 p-16-regular ;
    
   }
   .wrapper-light {
@@ -466,7 +466,7 @@
   }
   
   .sidebar-logo {
-    @apply flex items-center gap-2 md:py-2 px-5 dark:text-white text-black;
+    @apply flex items-center gap-2 md:py-2 px-5 text-white ;
   }
   
   .sidebar-nav {
@@ -474,15 +474,15 @@
   }
   
   .sidebar-nav_elements {
-    @apply md:flex flex-col items-start gap-2; /* Remove w-full */
+    @apply md:flex  flex-col items-start gap-2; /* Remove w-full */
   }
   
   .sidebar-nav_element {
-    @apply relative rounded-br-[45px] bg-blue-950 bg-cover transition-all hover:shadow-inner hover:bg-blue-950;
+    @apply relative w-full rounded-br-[45px] bg-cover transition-all hover:shadow-inner hover:bg-blue-950;
   }
   
   .sidebar-nav_element_selected {
-    @apply relative lg:rounded-tr-lg lg:rounded-tl-lg lg:rounded-bl-lg lg:rounded-br-[150px] bg-blue-800 bg-cover transition-all hover:shadow-inner ;
+    @apply relative w-full lg:rounded-tr-lg text-white lg:rounded-tl-lg lg:rounded-bl-lg lg:rounded-br-[150px] bg-blue-800 bg-cover transition-all hover:shadow-inner ;
   }
   .sidebar-nav_element_sub {
     @apply relative lg:rounded-tr-lg lg:rounded-tl-lg lg:rounded-bl-lg lg:rounded-br-[150px] hover:bg-blue-800 bg-cover transition-all hover:shadow-inner ;

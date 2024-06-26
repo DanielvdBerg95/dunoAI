@@ -32,7 +32,7 @@ declare type CreateOrganizationParams = {
  
 declare type UpdateOrganizationParams = {
   
-  name: string;
+  name?: string;
   idea?: string;
   industry?: Industry;
   size?: Size;
@@ -45,7 +45,7 @@ declare type UpdateOrganizationParams = {
   slug?: string;
   createdBy?: string;
   createdAt?: Date;
-  updatedAt: Date;
+  updatedAt?: Date;
   imageUrl: string;
   maxAllowedMemberships?: number;
   // Additional fields

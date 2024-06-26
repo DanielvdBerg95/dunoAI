@@ -135,7 +135,11 @@ export const SidebarData = [
             route: "/imagine",
             icon: "/assets/icons/image.svg",
           },
-          
+          {
+            label: "Dashboard",
+            route: "/imagine/imagine-dashboard",
+            icon: "/assets/icons/image.svg",
+          },
           {
             label: "Buy Credits",
             route: "/imagine/credits",

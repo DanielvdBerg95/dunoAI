@@ -50,18 +50,16 @@ export interface OrganizationDocument extends Document {
     slug: string;
     createdBy: string;
     createdAt: Date;
-    updatedAt: Date;
+    updatedAt?: Date | null;
     imageUrl: string;
     maxAllowedMemberships: number;
-    // Additional fields
-    affiliationEmailAddress?: string;
-    enrollmentMode?: string;
-    organizationId?: string;
+    affiliationEmailAddress?: string | null;
+    enrollmentMode?: string | null;
+    organizationId?: string | null;
     totalPendingInvitations?: number;
     totalPendingSuggestions?: number;
-    verification?: string;
-    status?: string;
-    
+    verification?: string | null;
+    status?: string | null;
 }
 
 const OrganizationSchema = new Schema({
@@ -79,7 +77,7 @@ const OrganizationSchema = new Schema({
     slug: { type: String, required: true, unique: true },
     createdBy: { type: String, required: true },
     createdAt: { type: Date, required: true, default: Date.now },
-    updatedAt: { type: Date, required: true, default: Date.now },
+    updatedAt: { type: Date, required: false, default: Date.now },
     imageUrl: { type: String },
     maxAllowedMemberships: { type: Number, required: true },
     affiliationEmailAddress: { type: String, default: null }, // Default value for optional fields
@@ -91,6 +89,6 @@ const OrganizationSchema = new Schema({
     status: { type: String, default: null }
 });
 
-const Organization = models?.Organization || model("Organization", OrganizationSchema);
+const Organization = models.Organization || model<OrganizationDocument>("Organization", OrganizationSchema);
 
 export default Organization;

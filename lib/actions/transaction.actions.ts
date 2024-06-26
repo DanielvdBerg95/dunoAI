@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation'
 import Stripe from "stripe";
 import { handleError } from '../utils';
-import { connect } from '../database/mongoose';
+import { connectToDatabase } from '../database/mongoose';
 import Transaction from '../database/models/transaction.model';
 import { updateCredits } from './user.action';
 
@@ -40,7 +40,7 @@ export async function checkoutCredits(transaction: CheckoutTransactionParams) {
 
 export async function createTransaction(transaction: CreateTransactionParams) {
   try {
-    await connect();
+    await connectToDatabase();
 
     // Create a new transaction with a buyerId
     const newTransaction = await Transaction.create({

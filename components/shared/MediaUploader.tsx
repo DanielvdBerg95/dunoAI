@@ -53,7 +53,7 @@ const MediaUploader = ({
 
   return (
     <CldUploadWidget
-      uploadPreset="jsm_imaginify"
+      uploadPreset="duno_ai"
       options={{
         multiple: false,
         resourceType: "image",
@@ -63,7 +63,7 @@ const MediaUploader = ({
     >
       {({ open }) => (
         <div className="flex flex-col gap-4">
-          <h3 className="h3-bold text-dark-600">
+          <h3 className="h3-bold text-light-600">
             Original
           </h3>
 
@@ -91,7 +91,7 @@ const MediaUploader = ({
                   height={24}
                 />
               </div>
-                <p className="p-14-medium">Click here to upload image</p>
+                <p className="p-14-medium">Upload image</p>
             </div>
           )}
         </div>

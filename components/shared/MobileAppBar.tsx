@@ -29,7 +29,7 @@ const MobileAppBar = () => {
   };
 
   return (
-    <header className='fixed flex flex-row h-20 top-0 right-0 py-5 px-5 w-full justify-between'>
+    <header className='hidden lg:fixed lg:flex lg:flex-row lg:h-20 lg:top-0 lg:right-0 lg:py-5 lg:px-5 lg:w-full lg:justify-between'>
       <Link href="/dashboard">
         <Image src="/duno_logo.png" width={50} height={50} alt="logo" />
       </Link>
@@ -54,41 +54,6 @@ const MobileAppBar = () => {
       </div>
 
 
-
-      <nav className='flex gap-2 items-center lg:hidden'>
-        {/* Example using Sheet and SubMenu */}
-        <Sheet>
-          <SheetTrigger className='text-white'>
-            <button className='shimmer-button h-8 w-8 text-white'>
-              <Image src="/assets/icons/icons/menu.svg" alt="menu" width={18} height={18} style={{ filter: 'invert(50%)' }} className='cursor-pointer text-white' />
-            </button>
-          </SheetTrigger>
-          <SheetContent className='gradient-background-b sheet-content sm:w-64'>
-            <Image src="/duno_text_logo.png" alt="logo" width={190} height={80} />
-            <ul className='header-nav_elements'>
-              {SidebarData.map((item, index) => (
-                <React.Fragment key={index}>
-                  <div
-                    className={`flex items-center p-14-medium px-4 py-2 cursor-pointer ${activeItem === index ? 'text-white mobile-nav_element' : 'text-gray-200'}`}
-                    onClick={() => handleItemClick(index)}
-                  >
-                    <Image src={item.icon} alt="logo" width={28} height={28} />
-                    <span className="ml-2">{item.title}</span>
-                  </div>
-                  {activeItem === index && (
-                    <SubMenuMobile
-                      subNav={item.subNav}
-                      isOpen={activeItem === index}
-                      activeRoute={pathname} // Example: Pass activeRoute as needed
-                      onSubItemClick={handleSubItemClick} // Pass the function to handle sub-menu item clicks
-                    />
-                  )}
-                </React.Fragment>
-              ))}
-            </ul>
-          </SheetContent>
-        </Sheet>
-      </nav>
 
     </header>
   );
