@@ -60,18 +60,23 @@ export async function POST(req: Request) {
   // CREATE
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
-
+  
+    if (!email_addresses || !email_addresses[0] || !email_addresses[0].email_address) {
+      console.error("Email address is missing, user creation aborted.");
+      return new Response("Invalid data: Email address is required", { status: 400 });
+    }
+  
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
-      username: username!,
-      firstName: first_name,
-      lastName: last_name,
-      photo: image_url,
+      username: username || "",  // Ensure username is not null
+      firstName: first_name || "",  // Optional, ensure not null
+      lastName: last_name || "",  // Optional, ensure not null
+      photo: image_url || "",  // Optional, ensure not null
     };
-
+  
     const newUser = await createUser(user);
-
+  
     // Set public metadata
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
@@ -80,25 +85,26 @@ export async function POST(req: Request) {
         },
       });
     }
-
+  
     return NextResponse.json({ message: "OK", user: newUser });
   }
 
   // UPDATE
   if (eventType === "user.updated") {
     const { id, image_url, first_name, last_name, username } = evt.data;
-
+  
     const user = {
-      firstName: first_name,
-      lastName: last_name,
-      username: username!,
-      photo: image_url,
+      firstName: first_name || "",  // Optional, ensure not null
+      lastName: last_name || "",  // Optional, ensure not null
+      username: username || "",  // Ensure username is not null
+      photo: image_url || "",  // Optional, ensure not null
     };
-
+  
     const updatedUser = await updateUser(id, user);
-
+  
     return NextResponse.json({ message: "OK", user: updatedUser });
   }
+  
 
   // DELETE
   if (eventType === "user.deleted") {

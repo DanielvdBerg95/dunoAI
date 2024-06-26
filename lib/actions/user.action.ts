@@ -11,6 +11,10 @@ export async function createUser(user: CreateUserParams) {
   try {
     await connectToDatabase();
 
+    if (!user.email) {
+      throw new Error("Email is required");
+    }
+
     const newUser = await User.create(user);
 
     return JSON.parse(JSON.stringify(newUser));
@@ -39,12 +43,16 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
   try {
     await connectToDatabase();
 
+    if (user.email === null || user.email === undefined) {
+      delete user.email; // Remove email field if it's null or undefined to avoid duplicate key error
+    }
+
     const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
       new: true,
     });
 
     if (!updatedUser) throw new Error("User update failed");
-    
+
     return JSON.parse(JSON.stringify(updatedUser));
   } catch (error) {
     handleError(error);
@@ -82,9 +90,9 @@ export async function updateCredits(userId: string, creditFee: number) {
       { _id: userId },
       { $inc: { creditBalance: creditFee }},
       { new: true }
-    )
+    );
 
-    if(!updatedUserCredits) throw new Error("User credits update failed");
+    if (!updatedUserCredits) throw new Error("User credits update failed");
 
     return JSON.parse(JSON.stringify(updatedUserCredits));
   } catch (error) {
