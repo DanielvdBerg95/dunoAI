@@ -5,7 +5,7 @@ import { CreateOrganization } from "@clerk/nextjs";
 
 const CreateOrganizationPage = () => {
   return (
-    <CreateOrganization afterCreateOrganizationUrl={"/onboarding"}/>
+    <CreateOrganization afterCreateOrganizationUrl={"/dashboard"}/>
   )
 }
 
