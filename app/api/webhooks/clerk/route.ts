@@ -1,11 +1,12 @@
-import { clerkClient } from "@clerk/nextjs";
-import { WebhookEvent } from "@clerk/nextjs/server";
+
+import { clerkClient, WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook } from "svix";
+import { User } from "@prisma/client";
 
-import { createUser, deleteUser, updateUser } from "@/lib/actions/user.action";
 import { createOrganization, deleteOrganization, updateOrganization } from "@/lib/actions/organization.actions";
+import { createUser } from "@/lib/prisma.users";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -60,39 +61,26 @@ export async function POST(req: Request) {
   // CREATE
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
-  
+  if(!id || !email_addresses) {
+    return new Response("Error occured -- missing user id or email addresses", {
+      status: 400,
+    });
+  }
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
-      username: username!,  // Ensure username is not null
-      firstName: first_name,  // Optional, ensure not null
-      lastName: last_name,  // Optional, ensure not null
-      photo: image_url,  // Optional, ensure not null
+      ...(username ? { username: username} : {}),
+      ...(first_name ? { firstName: first_name } : {}),
+      ...(last_name ? { lastName: last_name } : {}),
+      ...(image_url ? { photo: image_url } : {})  // Optional, ensure not null
     };
     console.log(user);
-    const newUser = await createUser(user);
-  
-    // Set public metadata
-    if (newUser) {
-      await clerkClient.users.updateUserMetadata(id, {
-        publicMetadata: {
-          userId: newUser._id,
-        },
-      });
-    }
-  
-    return NextResponse.json({ message: "new user created", user: newUser });
+    await createUser(user as User);
   }
   
 
   // DELETE
-  if (eventType === "user.deleted") {
-    const { id } = evt.data;
 
-    const deletedUser = await deleteUser(id!);
-
-    return NextResponse.json({ message: "OK", user: deletedUser });
-  }
 
   // CREATE Organization
   if (eventType === "organization.created") {
@@ -117,24 +105,6 @@ export async function POST(req: Request) {
     });
     }
     return NextResponse.json({ message: "OK", user: newOrganization });
-  }
-
-  // UPDATE ORGANIZATION
-  if (eventType === "organization.updated") {
-    const { id, name, created_by, updated_at, image_url } = evt.data;
-
-    const organization = {
-      name: name,
-      
-      created_by: created_by,
-      updatedAt: new Date(updated_at),
-      imageUrl: image_url,
-      // Added new field for logo URL
-    };
-
-    const updatedOrganization = await updateOrganization(id, organization);
-
-    return NextResponse.json({ message: "OK", organization: updatedOrganization });
   }
 
   // DELETE Organization
