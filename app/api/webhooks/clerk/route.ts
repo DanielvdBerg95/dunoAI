@@ -61,11 +61,6 @@ export async function POST(req: Request) {
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
   
-    if (!email_addresses || !email_addresses[0] || !email_addresses[0].email_address) {
-      console.error("Email address is missing, user creation aborted.");
-      return new Response("Invalid data: Email address is required", { status: 400 });
-    }
-  
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
