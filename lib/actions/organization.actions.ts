@@ -7,7 +7,7 @@ import { handleError } from "../utils";
 import Organization from "../database/models/organization.model";
 
 // CREATE
-export async function createOrganization(organization: CreateOrganizationParams) {
+export async function createOrganization(organization: any) {
   try {
     await connectToDatabase();
 

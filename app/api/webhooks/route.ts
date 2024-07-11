@@ -69,12 +69,12 @@ export async function POST(req: Request) {
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
-      username: username || "",  // Ensure username is not null
-      firstName: first_name || "",  // Optional, ensure not null
-      lastName: last_name || "",  // Optional, ensure not null
-      photo: image_url || "",  // Optional, ensure not null
+      username: username!,  // Ensure username is not null
+      firstName: first_name,  // Optional, ensure not null
+      lastName: last_name,  // Optional, ensure not null
+      photo: image_url,  // Optional, ensure not null
     };
-  
+    console.log(user);
     const newUser = await createUser(user);
   
     // Set public metadata
@@ -86,7 +86,7 @@ export async function POST(req: Request) {
       });
     }
   
-    return NextResponse.json({ message: "OK", user: newUser });
+    return NextResponse.json({ message: "new user created", user: newUser });
   }
 
   // UPDATE
