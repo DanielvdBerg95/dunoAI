@@ -83,22 +83,6 @@ export async function POST(req: Request) {
   
     return NextResponse.json({ message: "new user created", user: newUser });
   }
-
-  // UPDATE
-  if (eventType === "user.updated") {
-    const { id, image_url, first_name, last_name, username } = evt.data;
-  
-    const user = {
-      firstName: first_name || "",  // Optional, ensure not null
-      lastName: last_name || "",  // Optional, ensure not null
-      username: username || "",  // Ensure username is not null
-      photo: image_url || "",  // Optional, ensure not null
-    };
-  
-    const updatedUser = await updateUser(id, user);
-  
-    return NextResponse.json({ message: "OK", user: updatedUser });
-  }
   
 
   // DELETE
