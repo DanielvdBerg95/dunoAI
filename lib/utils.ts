@@ -1,11 +1,10 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-prototype-builtins */
 import { type ClassValue, clsx } from "clsx";
-import qs from "qs";
+import qs from "qs"; // Ensure 'qs' is now correctly typed
 import { twMerge } from "tailwind-merge";
 import jsPDF from "jspdf";
 import { aspectRatioOptions } from "@/constants";
-
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -54,9 +53,6 @@ export const dataUrl = `data:image/svg+xml;base64,${toBase64(
 // ==== End
 
 // FORM URL QUERY
-
-
-// FORM URL QUERY
 export const formUrlQuery = ({
   searchParams,
   key,
@@ -88,8 +84,6 @@ export function removeKeysFromQuery({
   return `${window.location.pathname}?${qs.stringify(currentUrl)}`;
 }
 
-
-
 // DEBOUNCE
 export const debounce = (func: (...args: any[]) => void, delay: number) => {
   let timeoutId: NodeJS.Timeout | null;
@@ -99,7 +93,7 @@ export const debounce = (func: (...args: any[]) => void, delay: number) => {
   };
 };
 
-// GE IMAGE SIZE
+// GET IMAGE SIZE
 export type AspectRatioKey = keyof typeof aspectRatioOptions;
 export const getImageSize = (
   type: string,
@@ -114,7 +108,6 @@ export const getImageSize = (
   }
   return image?.[dimension] || 1000;
 };
-
 
 // DOWNLOAD IMAGE
 export const download = (url: string, filename: string) => {
@@ -139,7 +132,7 @@ export const download = (url: string, filename: string) => {
 
 // DEEP MERGE OBJECTS
 export const deepMergeObjects = (obj1: any, obj2: any) => {
-  if(obj2 === null || obj2 === undefined) {
+  if (obj2 === null || obj2 === undefined) {
     return obj1;
   }
 
@@ -162,7 +155,6 @@ export const deepMergeObjects = (obj1: any, obj2: any) => {
 
   return output;
 };
-
 
 const adjectives = [
   "Happy",
